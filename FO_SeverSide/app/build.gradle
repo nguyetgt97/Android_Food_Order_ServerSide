@@ -54,5 +54,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:1.2.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
+    implementation 'com.jaredrummler:material-spinner:1.1.0'
+
 
 }

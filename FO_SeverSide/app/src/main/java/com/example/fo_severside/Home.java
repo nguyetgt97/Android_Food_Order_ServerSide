@@ -19,6 +19,7 @@ import com.example.fo_severside.Common.Common;
 import com.example.fo_severside.Interface.ItemClickListener;
 import com.example.fo_severside.Model.Category;
 import com.example.fo_severside.ViewHolder.MenuViewHolder;
+import com.example.fo_severside.ViewHolder.OrderViewHoder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -76,7 +77,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     Category newCategory;
     Uri saveUri;
-    private final int PICK_IMAGE_REQUEST = 71;
+
 
     DrawerLayout drawer;
 
@@ -175,7 +176,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 if (newCategory != null){
                     categories.push().setValue(newCategory);
 //                    Toast.makeText(Home.this, "new category"+newCategory, Toast.LENGTH_SHORT).show();
-                    Snackbar.make(drawer, "new category"+ newCategory.getName()+"was added", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(drawer, "new category "+ newCategory.getName()+"was added", Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -237,7 +238,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+        if (requestCode == Common.PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null)
         {
             saveUri = data.getData();
@@ -250,7 +251,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select Picture"),PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"),Common.PICK_IMAGE_REQUEST);
 
     }
 
@@ -270,7 +271,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-
+//                          send Category Id and Start new Activity
+                        Intent foodList = new Intent(Home.this, FoodList.class);
+                        foodList.putExtra("CategoryId", adapter.getRef(position).getKey());
+                        startActivity(foodList);
                     }
                 });
 
@@ -318,24 +322,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-//        if ( id == R.id.nav_menu){
-//
-//        }else if (id == R.id.nav_cart){
-//
-//            Intent cartIntent = new Intent(Home.this, Cart.class);
-//            startActivity(cartIntent);
-//
-//        }
-//        else if (id == R.id.nav_orders){
-//            Intent orderIntent = new Intent(Home.this, OrderStatus.class);
-//            startActivity(orderIntent);
-//
-//        }else if (id == R.id.nav_log_out){
-//            Intent signIn = new Intent(Home.this, SignIn.class);
-//            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(signIn);
-//
-//        }
+
+        if ( id == R.id.nav_orders){
+            Intent orders = new Intent(Home.this, OrderStatus.class);
+            startActivity(orders);
+
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

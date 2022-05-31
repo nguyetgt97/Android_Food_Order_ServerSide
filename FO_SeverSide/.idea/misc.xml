@@ -3,6 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Ann/LTUDDD/FO_Serverside/Android_Food_Order_ServerSide/FO_SeverSide/app/src/main/res/layout/activity_food_list.xml" value="0.20742753623188406" />
+        <entry key="..\:/Ann/LTUDDD/FO_Serverside/Android_Food_Order_ServerSide/FO_SeverSide/app/src/main/res/layout/activity_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Ann/LTUDDD/FO_Serverside/Android_Food_Order_ServerSide/FO_SeverSide/app/src/main/res/layout/activity_order_status.xml" value="0.20742753623188406" />
+        <entry key="..\:/Ann/LTUDDD/FO_Serverside/Android_Food_Order_ServerSide/FO_SeverSide/app/src/main/res/layout/add_new_food_layout.xml" value="0.20742753623188406" />
+        <entry key="..\:/Ann/LTUDDD/FO_Serverside/Android_Food_Order_ServerSide/FO_SeverSide/app/src/main/res/layout/add_new_menu_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Ann/LTUDDD/FO_Serverside/Android_Food_Order_ServerSide/FO_SeverSide/app/src/main/res/layout/app_bar_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Ann/LTUDDD/FO_Serverside/Android_Food_Order_ServerSide/FO_SeverSide/app/src/main/res/layout/food_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Ann/LTUDDD/FO_Serverside/Android_Food_Order_ServerSide/FO_SeverSide/app/src/main/res/layout/menu_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Ann/LTUDDD/FO_Serverside/Android_Food_Order_ServerSide/FO_SeverSide/app/src/main/res/layout/order_layout.xml" value="0.2598958333333333" />
+        <entry key="..\:/Ann/LTUDDD/FO_Serverside/Android_Food_Order_ServerSide/FO_SeverSide/app/src/main/res/layout/update_order_layout.xml" value="0.20625" />
+        <entry key="..\:/Ann/LTUDDD/FO_Serverside/Android_Food_Order_ServerSide/FO_SeverSide/app/src/main/res/menu/activity_main_drawer.xml" value="0.2598958333333333" />
         <entry key="..\:/Ann/LTUDDD/FO_SeverSide/app/src/main/res/layout/activity_home.xml" value="0.16590678824721378" />
         <entry key="..\:/Ann/LTUDDD/FO_SeverSide/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Ann/LTUDDD/FO_SeverSide/app/src/main/res/layout/activity_sign_in.xml" value="0.1403985507246377" />
