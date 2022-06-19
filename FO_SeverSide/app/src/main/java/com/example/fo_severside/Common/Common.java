@@ -1,10 +1,12 @@
 package com.example.fo_severside.Common;
 
+import com.example.fo_severside.Model.Request;
 import com.example.fo_severside.Model.User;
 
 public class Common {
 
     public static User currentUser;
+    public static Request currentRequest;
     public static final String UPDATE = "Update";
     public static final String DELETE = "Delete";
     public static final int PICK_IMAGE_REQUEST = 71;
