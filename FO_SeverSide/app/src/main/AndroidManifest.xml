@@ -27,7 +27,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAJqDbUKDYGtOVuBhG3tiARQyNeWSVTTUo" />
+            android:value="AIzaSyCYqZ176-XzOoA_J9MHaZ4EoSBReDlwChs" />
 
         <activity
             android:name=".TrackingOrder"
