@@ -7,16 +7,21 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.location.Location;
 //import android.location.LocationListener;
 //import android.location.LocationRequest;
 //import com.google.android.gms.location;
 import com.example.fo_severside.Common.Common;
+import com.example.fo_severside.Common.DirectionJSONParser;
 import com.example.fo_severside.Remote.IGeoCoordinates;
 import com.google.android.gms.location.LocationListener;
+
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -33,10 +38,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -150,6 +160,22 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
                             .title("Order of "+Common.currentRequest.getPhone())
                             .position(orderLocation);
                     mMap.addMarker(marker);
+
+//                    draw route
+                    mServices.getDirections(yourLocation.latitude+","+yourLocation.longitude,
+                            orderLocation.latitude +","+orderLocation.longitude)
+                            .enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call, Response<String> response) {
+                                    new ParserTask().execute(response.body().toString());
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<String> call, Throwable t) {
+
+                                }
+                            });
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -286,5 +312,62 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
+        ProgressDialog mDialog = new ProgressDialog(TrackingOrder.this);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mDialog.setMessage("Please waiting ...");
+            mDialog.show();
+                }
+
+        @Override
+        protected List<List<HashMap<String, String>>> doInBackground(String... strings) {
+            JSONObject jObject ;
+            List<List<HashMap<String, String>>> routes = null;
+            try {
+                jObject = new JSONObject(strings[0]);
+
+                DirectionJSONParser parser = new DirectionJSONParser();
+
+                routes = parser.parse(jObject);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return routes;
+        }
+
+        @Override
+        protected void onPostExecute(List<List<HashMap<String, String>>> lists) {
+            mDialog.dismiss();
+            ArrayList points = null;
+            PolylineOptions lineOptions = null;
+
+            for (int i = 0; i<lists.size(); i++){
+                points = new ArrayList();
+                lineOptions = new PolylineOptions();
+
+                List<HashMap<String, String>> path = lists.get(i);
+                for (int j =0 ; j<path.size();j++){
+                    HashMap<String, String> point = path.get(j);
+                    double lat = Double.parseDouble(point.get("lat"));
+                    double lng = Double.parseDouble(point.get("lng"));
+                    LatLng position = new LatLng(lat, lng);
+
+                    points.add(position);
+
+                }
+
+                lineOptions.addAll(points);
+                lineOptions.width(12);
+                lineOptions.color(Color.RED);
+                lineOptions.geodesic(true);
+
+            }
+            mMap.addPolyline(lineOptions);
+        }
     }
 }
