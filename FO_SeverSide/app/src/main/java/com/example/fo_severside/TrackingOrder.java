@@ -75,6 +75,7 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
 
 //    private ActivityTrackingOrderBinding binding;
 
+//    @RequiresApi(api = Build.VERSION_CODES.S)?
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,8 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
     }
 
+
+
     private void displayLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
@@ -117,8 +120,8 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
                 double longitude = mLastLocation.getLongitude();
 
 //                add marker in your location and move the camera
-//                LatLng yourLocation = new LatLng(latitude, longitude);
-                LatLng yourLocation = new LatLng(21.007510, 105.842740);
+                LatLng yourLocation = new LatLng(latitude, longitude);
+//                LatLng yourLocation = new LatLng(21.027500,105.796650);
                 mMap.addMarker(new MarkerOptions().position(yourLocation).title("Your location"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(yourLocation));
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
@@ -265,6 +268,11 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+//        add marker in 1 Dai Co viet
+
+        LatLng hust = new LatLng(21.007510,105.842740);
+        mMap.addMarker(new MarkerOptions().position(hust).title("Marker in Hust"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(hust));
 
     }
 
