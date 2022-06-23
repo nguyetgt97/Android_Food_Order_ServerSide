@@ -19,6 +19,9 @@ import android.location.Location;
 import com.example.fo_severside.Common.Common;
 import com.example.fo_severside.Common.DirectionJSONParser;
 import com.example.fo_severside.Remote.IGeoCoordinates;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationAvailability;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationListener;
 
 import android.os.AsyncTask;
@@ -30,6 +33,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,6 +43,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,9 +59,7 @@ import retrofit2.Response;
 
 public class TrackingOrder extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener
-{
+        GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleMap mMap;
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
@@ -72,7 +75,7 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
     private static int DISPLACEMENT = 10;
 
     private IGeoCoordinates mServices;
-
+    private FusedLocationProviderClient mFusedLocationProviderClient;
 //    private ActivityTrackingOrderBinding binding;
 
 //    @RequiresApi(api = Build.VERSION_CODES.S)?
@@ -81,7 +84,7 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking_order);
-
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         mServices = Common.getGeoCodeService();
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -114,25 +117,29 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
             requestRuntimePermission();
         }
         else{
-            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if(mLastLocation != null){
-                double latitude = mLastLocation.getLatitude();
-                double longitude = mLastLocation.getLongitude();
+            mFusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if(location != null){
+                        double latitude = location.getLatitude();
+                        double longitude = location.getLongitude();
 
 //                add marker in your location and move the camera
-                LatLng yourLocation = new LatLng(latitude, longitude);
+                        LatLng yourLocation = new LatLng(latitude, longitude);
 //                LatLng yourLocation = new LatLng(21.027500,105.796650);
-                mMap.addMarker(new MarkerOptions().position(yourLocation).title("Your location"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(yourLocation));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
+                        mMap.addMarker(new MarkerOptions().position(yourLocation).title("Your location"));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(yourLocation));
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
 
 //                after add Marker for your location , add Marker for this Order and drawr Route
-                drawRoute(yourLocation, Common.currentRequest.getAddress());
+                        drawRoute(yourLocation, Common.currentRequest.getAddress());
 
-            }
-            else{
-                Toast.makeText(this, "Couldn't get the location", Toast.LENGTH_SHORT).show();
-            }
+                    }
+                    else{
+                        Toast.makeText(TrackingOrder.this, "Couldn't get the location", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
     }
 
@@ -277,12 +284,6 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
     }
 
     @Override
-    public void onLocationChanged(@NonNull Location location){
-            mLastLocation = location;
-            displayLocation();
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         checkPlayService();
@@ -307,7 +308,19 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
         {
             return;
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,mLocationRequest,  this);
+        mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, new LocationCallback() {
+            @Override
+            public void onLocationAvailability(@NonNull LocationAvailability locationAvailability) {
+                super.onLocationAvailability(locationAvailability);
+            }
+
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                mLastLocation = locationResult.getLastLocation();
+                displayLocation();
+            }
+        }, null);
 //                requestLocationUpdates(mGoogleApiClient,mLocationRequest, (com.google.android.gms.location.LocationListener) this);
     }
 
