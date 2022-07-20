@@ -14,6 +14,19 @@
     <color name="btnSignIn">#A9d440</color>
     <color name="overlayBackground"> #464815</color>
     <color name="overlayActionBar">#0e0d0e</color>
-    <color name="greenlight">#ECF6C8</color>
+
+    <color name="background_red_1">#FAA0A0</color>
+    <color name="background_red_2">#E97451</color>
+    <color name="background_red_3">#C41E3A</color>
+
+    <color name="text_color">#000000</color>
+
+    <color name="light_pink">#fc327e</color>
+    <color name="light_green">#1ac831</color>
+    <color name="light_yellow">#ffac30</color>
+    <color name="light_purple">#cd06ff</color>
+    <color name="light_orange">#f66224</color>
+    <color name="light_red">#ef0148</color>
+    <color name="dark_green">#CDC733</color>
 
 </resources>

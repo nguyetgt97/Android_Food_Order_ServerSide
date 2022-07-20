@@ -8,11 +8,31 @@
     android:id="@+id/rootLayout"
     tools:context=".FoodList">
 
+    <RelativeLayout
+    android:id="@+id/ll_appBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_red_2"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_restAppBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thực đơn"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        />
+
+</RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_food"
-        android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/ll_appBar"
+        android:scrollbars="vertical" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

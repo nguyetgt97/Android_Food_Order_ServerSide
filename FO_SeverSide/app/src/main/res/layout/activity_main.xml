@@ -9,52 +9,62 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
         <ImageView
-            android:src="@drawable/logo_eat_it"
-            android:layout_width="200dp"
-            android:layout_height="200dp"/>
+            android:src="@drawable/bkfood_logo"
+            android:layout_width="350dp"
+            android:layout_height="150dp"/>
         <TextView
             android:gravity="center"
             android:id="@+id/txtSlogan"
             android:text="@string/slogan"
-            android:textColor="@android:color/white"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"/>
+            android:textColor="@color/text_color"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            />
 
 
     </LinearLayout>
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:weightSum="2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-<!--        <Button-->
-<!--            android:id="@+id/btnSignUp"-->
-<!--            android:text="Sign Up"-->
-<!--            android:textColor="@android:color/white"-->
-<!--            android:layout_weight="1"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="8dp"-->
-<!--            android:backgroundTint="@android:color/holo_green_dark"-->
-<!--            />-->
-
-        <Button
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="150dp"
+        >
+        <android.widget.Button
             android:id="@+id/btnSignIn"
-            android:text="Sign In"
-            android:textColor="@android:color/white"
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:backgroundTint="@android:color/holo_green_light"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_rounded_input_button"
+            android:text="Đăng nhập"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             />
-
+        <!--
+        <android.widget.Button
+            android:id="@+id/btnSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_rounded_input_button"
+            android:fontFamily="@font/Lora_Bold"
+            android:text="Đăng ký"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+        />
+        -->
     </LinearLayout>
 
 </RelativeLayout>

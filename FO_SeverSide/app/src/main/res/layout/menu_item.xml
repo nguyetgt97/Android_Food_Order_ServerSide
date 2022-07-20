@@ -7,26 +7,26 @@
 
 
     <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/menu_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/my_bg" />
 
-        <ImageView
-            android:id="@+id/menu_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/my_bg" />
-
-        <TextView
-            android:id="@+id/menu_name"
-            android:text="Name of menu"
-            android:textColor="@android:color/white"
-            android:background="#4f0ed0"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/menu_name"
+        android:text="Name of menu"
+        android:textColor="@android:color/white"
+        android:background="#4f0ed0"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
 
 </androidx.cardview.widget.CardView>

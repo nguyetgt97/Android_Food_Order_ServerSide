@@ -9,51 +9,147 @@
 
 
 
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/diet" />
+
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@+id/logo"
+        android:gravity="center"
+        android:text="@string/app_title"
+        android:textColor="@color/text_color"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/welcome_text"
+        android:layout_marginLeft="25dp"
+        android:layout_toRightOf="@+id/logo"
+        android:src="@drawable/bkfood_logo" />
+
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Vui lòng nhập số điện thoại và mật khẩu\nđể Đăng nhập"
+            android:textColor="@color/text_color"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/editPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone Number"
+            android:layout_marginTop="30dp"
+            android:hint="Số điện thoại"
             android:inputType="phone"
             android:maxLength="11"
-            android:text="0875123456"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:textSize="34sp" />
+            android:textColor="@color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="24sp" />
 
         <EditText
             android:id="@+id/editPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:layout_marginTop="30dp"
+            android:hint="Mật khẩu"
             android:inputType="textPassword"
-            android:text="123456"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:textSize="34sp"
-            />
+            android:textColor="@color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="24sp" />
     </LinearLayout>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnSignIn"
-        android:text="Sign In"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="@android:color/holo_green_light"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/bg_rounded_input_button"
+        android:text="Đăng nhập"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
-        />
+    <!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="70dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/Lora_Regular"
+            android:text="Bạn không có tài khoản?"
+            android:textAlignment="center"
+            android:textColor="@color/text_color"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_registerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:fontFamily="@font/Lora_Bold"
+            android:text="Đăng ký ngay"
+            android:textAlignment="center"
+            android:textColor="@color/light_red"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:fontFamily="@font/Lora_BoldItalic"
+            android:text="Quên mật khẩu?"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+    -->
+
+</RelativeLayout>
 </RelativeLayout>

@@ -328,6 +328,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             startActivity(orders);
 
         }
+        else if (id == R.id.nav_log_out){
+            Intent signIn = new Intent(Home.this, SignIn.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
+
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
